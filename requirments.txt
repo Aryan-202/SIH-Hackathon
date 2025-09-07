@@ -1,0 +1,2 @@
+frontend:
+npm i @react-oauth/google axios react-router-dom
