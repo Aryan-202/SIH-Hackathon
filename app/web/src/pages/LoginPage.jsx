@@ -1,23 +1,9 @@
-import React from 'react';
-import {useGoogleLogin} from '@react-oauth/google';
+import React from 'react'
 
 const LoginPage = () => {
-
-  const googleLogin = useGoogleLogin({
-    onSuccess: ()=>{},
-    onError: ()=>{},
-    flow: 'auth-code'
-  })
-
-
-
   return (
     <div>
-      <button
-      onClick={googleLogin}
-      >
-        login with google
-      </button>
+      login
     </div>
   )
 }

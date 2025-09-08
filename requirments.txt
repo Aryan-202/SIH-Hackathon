@@ -1,6 +1,9 @@
 frontend:
 npm i @react-oauth/google axios react-router-dom
 
+npm install tailwindcss @tailwindcss/vite
+npm install framer-motion
+
 backend:
 npm init -y
 npm i axios express cors dotenv googleapis jsonwebtoken mongoose nodemon bcryptjs nodemailer cookie-parser
