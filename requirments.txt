@@ -3,6 +3,7 @@ npm i @react-oauth/google axios react-router-dom
 
 npm install tailwindcss @tailwindcss/vite
 npm install framer-motion
+npm install motion
 
 backend:
 npm init -y
