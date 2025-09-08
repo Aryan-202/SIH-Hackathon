@@ -55,6 +55,11 @@ export const register = async (req,res) =>{
         //     text: `Hello ${name},\n\nWelcome to our app! We're glad to have you on board.\nYour account has been created successfully with email id: ${email}\n\nBest regards,\nThe Team`
         // }
 
+        res.status(201).json({
+            success: true,
+            message: 'user registered successfully'
+        })
+
          
 
     } catch (error) {
