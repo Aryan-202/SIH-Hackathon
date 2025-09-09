@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Shield, MapPin, AlertTriangle, Users, Eye, Smartphone, Globe, CheckCircle, Star, Phone, Mail, Map, Clock, Zap } from 'lucide-react';
+import { motion, useScroll, useTransform } from "framer-motion";
 
 
 
@@ -11,6 +12,12 @@ const SafeTourLanding = () => {
     email: '',
     organization: '',
     message: ''
+  });
+
+  const { scrollYProgress } = useScroll({
+    // Optional: track a specific element
+    // target: refToElement,
+    // offset: ["start end", "end start"]
   });
 
   
@@ -27,9 +34,79 @@ const SafeTourLanding = () => {
     alert('Thank you for your inquiry! We will contact you soon.');
     setFormData({ name: '', email: '', organization: '', message: '' });
   };
+  
+  //Animations
+  
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 80 }, // start invisible and slightly below
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
+  const stepVariants = {
+    hidden: { opacity: 0, x: 100 }, // start off to the right
+    visible: (i) => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: i * 0.1, // staggered by index
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    }),
+  };
+
+  const fadeUpVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const testimonialVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        delay: i * 0.3, // stagger by index
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    }),
+  };
+
+  const slideVariants = {
+    hiddenLeft: { opacity: 0, x: -100 },
+    hiddenRight: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]); // from 0.8 → 1
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]); // fade in
+
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600">
+    <motion.div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600" >
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-transparent"></div>
@@ -117,67 +194,102 @@ const SafeTourLanding = () => {
       </section>
 
       {/* Features Section */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={scrollYProgress > 0.1 ? "visible" : "hidden"} // trigger by scroll
+      >
       <section id="features" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Comprehensive Safety Features</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Comprehensive Safety Features
+            </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Advanced technology stack designed to provide complete tourist safety monitoring and rapid emergency response
+              Advanced technology stack designed to provide complete tourist safety
+              monitoring and rapid emergency response
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              visible: { transition: { staggerChildren: 0.25 } },
+            }}
+          >
             {[
               {
                 icon: MapPin,
                 title: "Real-time Location Tracking",
-                description: "GPS-enabled monitoring with geofencing for safe zone management and instant location updates.",
-                color: "blue"
+                description:
+                  "GPS-enabled monitoring with geofencing for safe zone management and instant location updates.",
+                color: "blue",
               },
               {
                 icon: Shield,
                 title: "Blockchain Digital IDs",
-                description: "Immutable, secure digital identification system built on blockchain for foolproof tourist verification.",
-                color: "green"
+                description:
+                  "Immutable, secure digital identification system built on blockchain for foolproof tourist verification.",
+                color: "green",
               },
               {
                 icon: Eye,
                 title: "AI-Powered Monitoring",
-                description: "Machine learning algorithms detect anomalies and potential threats through behavioral pattern analysis.",
-                color: "purple"
+                description:
+                  "Machine learning algorithms detect anomalies and potential threats through behavioral pattern analysis.",
+                color: "purple",
               },
               {
                 icon: AlertTriangle,
                 title: "Instant Alert System",
-                description: "Multi-channel emergency alerts with automated response protocols and real-time escalation.",
-                color: "orange"
+                description:
+                  "Multi-channel emergency alerts with automated response protocols and real-time escalation.",
+                color: "orange",
               },
               {
                 icon: Users,
                 title: "Multi-Stakeholder Dashboard",
-                description: "Role-based access for tourists, authorities, and administrators with customized interfaces.",
-                color: "indigo"
+                description:
+                  "Role-based access for tourists, authorities, and administrators with customized interfaces.",
+                color: "indigo",
               },
               {
                 icon: Globe,
                 title: "Multi-Language Support",
-                description: "Localized interfaces supporting multiple languages for international tourist accessibility.",
-                color: "teal"
-              }
+                description:
+                  "Localized interfaces supporting multiple languages for international tourist accessibility.",
+                color: "teal",
+              },
             ].map((feature, index) => (
-              <div key={index} className="group hover:scale-105 transition-all duration-300">
+              <motion.div
+                key={index}
+                variants={cardVariants} // animation variant
+                className="group hover:scale-105 transition-all duration-300"
+              >
                 <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                  <div className={`w-14 h-14 bg-${feature.color}-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className={`w-7 h-7 text-${feature.color}-600`} />
+                  <div
+                    className={`w-14 h-14 bg-${feature.color}-100 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    <feature.icon
+                      className={`w-7 h-7 text-${feature.color}-600`}
+                    />
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
+      </motion.div>
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-24 bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -190,48 +302,75 @@ const SafeTourLanding = () => {
           </div>
 
           <div className="relative">
-            <div className="grid lg:grid-cols-3 gap-8">
+            <motion.div
+              className="grid lg:grid-cols-3 gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               {[
                 {
                   step: "01",
                   title: "Tourist Registration",
-                  description: "Tourists register through our mobile app, creating blockchain-secured digital IDs with emergency contacts and travel itineraries.",
+                  description:
+                    "Tourists register through our mobile app, creating blockchain-secured digital IDs with emergency contacts and travel itineraries.",
                   icon: Smartphone,
-                  color: "blue"
+                  color: "blue",
                 },
                 {
-                  step: "02", 
+                  step: "02",
                   title: "AI Monitoring & Tracking",
-                  description: "Real-time location tracking with AI-powered anomaly detection monitors tourist safety and identifies potential risks automatically.",
+                  description:
+                    "Real-time location tracking with AI-powered anomaly detection monitors tourist safety and identifies potential risks automatically.",
                   icon: Eye,
-                  color: "green"
+                  color: "green",
                 },
                 {
                   step: "03",
                   title: "Emergency Response",
-                  description: "Instant alerts to authorities with automated e-FIR generation, response team coordination, and real-time incident management.",
+                  description:
+                    "Instant alerts to authorities with automated e-FIR generation, response team coordination, and real-time incident management.",
                   icon: Zap,
-                  color: "orange"
-                }
+                  color: "orange",
+                },
               ].map((step, index) => (
-                <div key={index} className="relative">
+                <motion.div
+                  key={index}
+                  className="relative"
+                  custom={index}
+                  variants={stepVariants}
+                >
                   <div className="text-center">
-                    <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-${step.color}-500 to-${step.color}-600 rounded-full flex items-center justify-center shadow-lg`}>
+                    <div
+                      className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-${step.color}-500 to-${step.color}-600 rounded-full flex items-center justify-center shadow-lg`}
+                    >
                       <step.icon className="w-10 h-10 text-white" />
                     </div>
-                    <div className={`text-6xl font-bold text-${step.color}-200 mb-4`}>{step.step}</div>
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">{step.title}</h3>
+                    <div className={`text-6xl font-bold text-${step.color}-200 mb-4`}>
+                      {step.step}
+                    </div>
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                      {step.title}
+                    </h3>
                     <p className="text-gray-600 leading-relaxed">{step.description}</p>
                   </div>
+
                   {index < 2 && (
                     <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-gradient-to-r from-blue-300 to-transparent transform translate-y-8 z-0"></div>
                   )}
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
+
           </div>
 
-          <div className="mt-16 text-center">
+          <motion.div
+            className="mt-16 text-center"
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <div className="bg-white rounded-2xl p-8 shadow-xl max-w-4xl mx-auto">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Choose Your Access Level</h3>
               <div className="grid md:grid-cols-2 gap-6">
@@ -261,7 +400,8 @@ const SafeTourLanding = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
+
         </div>
       </section>
 
@@ -276,25 +416,37 @@ const SafeTourLanding = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                quote: "SafeTour has revolutionized how we monitor and protect tourists. The real-time alerts and AI detection have helped us prevent numerous incidents.",
+                quote:
+                  "SafeTour has revolutionized how we monitor and protect tourists. The real-time alerts and AI detection have helped us prevent numerous incidents.",
                 author: "Director, Tourism Department",
                 organization: "Andhra Pradesh Government",
-                rating: 5
+                rating: 5,
               },
               {
-                quote: "The blockchain digital ID system provides unmatched security and verification capabilities. Emergency response times have improved by 60%.",
+                quote:
+                  "The blockchain digital ID system provides unmatched security and verification capabilities. Emergency response times have improved by 60%.",
                 author: "Commissioner of Police",
-                organization: "Guntur Police Department", 
-                rating: 5
+                organization: "Guntur Police Department",
+                rating: 5,
               },
               {
-                quote: "Implementation was smooth and the dashboard is incredibly intuitive. Our officers can now respond to tourist emergencies more efficiently than ever.",
+                quote:
+                  "Implementation was smooth and the dashboard is incredibly intuitive. Our officers can now respond to tourist emergencies more efficiently than ever.",
                 author: "Deputy Superintendent",
                 organization: "State Tourism Police",
-                rating: 5
-              }
+                rating: 5,
+              },
             ].map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 shadow-lg border border-blue-100">
+              <motion.div
+                key={index}
+                className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-8 shadow-lg border border-blue-100 hover:shadow-2xl transition-all duration-300"
+                custom={index}
+                variants={testimonialVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ scale: 1.05, rotate: -1 }} // subtle tilt on hover
+              >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -307,7 +459,7 @@ const SafeTourLanding = () => {
                   <div className="font-semibold text-gray-900">{testimonial.author}</div>
                   <div className="text-blue-600 text-sm">{testimonial.organization}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -321,8 +473,27 @@ const SafeTourLanding = () => {
             Download our mobile app for tourists or access the web dashboard for authorities and administrators
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+          <motion.div
+            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.3, // delay between cards
+                },
+              },
+            }}
+          >
+            <motion.div
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
+              variants={slideVariants}
+              initial="hiddenLeft"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <Smartphone className="w-16 h-16 text-white mx-auto mb-6" />
               <h3 className="text-2xl font-bold text-white mb-4">Tourist Mobile App</h3>
               <p className="text-blue-100 mb-6">
@@ -336,9 +507,15 @@ const SafeTourLanding = () => {
                   Download for Android
                 </button>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
+            <motion.div
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
+              variants={slideVariants}
+              initial="hiddenRight"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <Globe className="w-16 h-16 text-white mx-auto mb-6" />
               <h3 className="text-2xl font-bold text-white mb-4">Authority Dashboard</h3>
               <p className="text-blue-100 mb-6">
@@ -352,8 +529,8 @@ const SafeTourLanding = () => {
                   Request Demo
                 </button>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -528,7 +705,7 @@ const SafeTourLanding = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </motion.div>
   );
 };
 
