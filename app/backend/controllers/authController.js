@@ -154,8 +154,15 @@ export const googleLogin = async (req, res)=>{
     try {
         const { code } = req.query;
         const googleRes = await OAuth2client.getToken(code);
-        OAuth2client.setCredentials(googleRes.tokens)
+        OAuth2client.setCredentials(googleRes.tokens);
+        res.json({
+            success: true,
+            message: "login success."
+        })
     } catch (error) {
-        
+        res.json({
+            success: false,
+            message: "oauth not completed"
+        });
     }
 }
