@@ -5,10 +5,13 @@ import LoginPage from './pages/LoginPage';
 import DashBoard from './pages/DashBoard';
 import PageNotFound from './pages/PageNotFound';
 import SignupPage from './pages/SignupPage';
+import { GoogleOAuthProvider } from '@react-oauth/google'
+
+// You must define your Google Client ID here.
+// Get this from your Google Cloud Console project.
+const clientId = "213842657098-jppcg1cul11sthuhc1717eq15f8btapq.apps.googleusercontent.com";
 
 function App() {
-  
-
   return (
     <>
       <Router>
@@ -17,7 +20,11 @@ function App() {
             <Route path='/' element={<HomePage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/dashboard' element={<DashBoard/>}/>
-            <Route path='/signup' element={<SignupPage/>}/>
+            <Route path='/signup' element={
+              <GoogleOAuthProvider clientId={clientId}>
+                  <SignupPage />
+              </GoogleOAuthProvider>
+              }/>
             <Route path='*' element={<PageNotFound/>}/>
           </Routes>
         </main>

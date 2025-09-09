@@ -1,6 +1,8 @@
 import userModel from "../models/userModel.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import axios from "axios";
+
 
 
 
@@ -144,5 +146,16 @@ export const logout = async (req, res)=>{
             success: false,
             message: error.message
         });
+    }
+}
+
+
+export const googleLogin = async (req, res)=>{
+    try {
+        const { code } = req.query;
+        const googleRes = await OAuth2client.getToken(code);
+        OAuth2client.setCredentials(googleRes.tokens)
+    } catch (error) {
+        
     }
 }

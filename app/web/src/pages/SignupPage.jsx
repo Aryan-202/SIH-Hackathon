@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
+import { useGoogleLogin } from '@react-oauth/google';
 
 // Main App component that serves as the sign-up page.
 const App = () => {
@@ -11,7 +12,23 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  
   const navigateSignIn = useNavigate();
+
+
+  const responseGoogle  = async (authResult) => {
+    try {
+      console.log(authResult)
+    } catch (error) {
+      console.log('error here',error)
+    }
+  }
+
+  const googleLogin = useGoogleLogin({
+    onSuccess:responseGoogle,
+    onError: responseGoogle,
+    flow: 'auth-code'
+  })
 
   const handleSignUpClick = () =>{
     navigateSignIn("/login");
@@ -206,7 +223,7 @@ const App = () => {
         {/* Social Login Buttons as Circular Icons */}
         <div className="flex justify-center space-x-4">
           <button
-            onClick={() => handleSocialLogin('Google')}
+            onClick={googleLogin}
             className="w-12 h-12 rounded-full flex items-center justify-center text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
           >
             {googleIcon}
