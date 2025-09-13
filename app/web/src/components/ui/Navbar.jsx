@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link , useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -67,7 +67,7 @@ const Navbar = () => {
             <a href="#for-authorities" className="nav-link" onClick={closeMenu}>Authorities</a>
           </li>
           <li className="nav-item">
-            <a href="#for-tourists" className="nav-link" onClick={closeMenu}>Tourists</a>
+            <Link to="/tourist" className="nav-link" onClick={closeMenu}>Tourist</Link>
           </li>
           <li className="nav-item">
             <a href="#contact" className="nav-link" onClick={closeMenu}>Contact</a>
