@@ -98,16 +98,6 @@ const mockTourists = [
 ];
 
 const mockAlerts = [
-  {
-    id: 1,
-    touristId: 2,
-    type: 'Panic Button',
-    severity: 'high',
-    timestamp: '10:25 AM',
-    description: 'Panic button activated by tourist',
-    tourist: null // This will be populated when the alert is created
-  }
-    
   // ... (keep your mock data the same)
 ]
 
@@ -581,5 +571,6 @@ function App() {
     </Box>
   );
 }
+
 
 export default App;
