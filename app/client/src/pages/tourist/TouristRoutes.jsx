@@ -1,10 +1,13 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import TouristLandingPage from './TouristLandingPage'
 
 const TouristRoutes = () => {
   return (
-    <div>
-      TouristRoutes
-    </div>
+    <Routes>
+      <Route path='/' element={<TouristLandingPage/>} />
+      {/* Add other tourist routes here */}
+    </Routes>
   )
 }
 

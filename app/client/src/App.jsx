@@ -14,14 +14,8 @@ const App = () => {
         <Navbar/>
         <Routes>
           <Route path='/' element={<LandingPage/>}/>
-        </Routes>
-        <Routes>
           <Route path='/admin/*' element={<AdminRoutes/>}/>
-        </Routes>
-        <Routes>
           <Route path='/tourist/*' element={<TouristRoutes/>} />
-        </Routes>
-        <Routes>
           <Route path="/about" element={<About />} />
         </Routes>
         <Footer/>
