@@ -17,9 +17,10 @@ const App = () => {
         <Routes>
           <Route path='/tourist/*' element={<TouristRoutes/>} />
         </Routes>
+        
       </div>
     </Router>
-  )
+  );
 }
 
 export default App
