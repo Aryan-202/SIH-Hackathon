@@ -117,69 +117,39 @@ const AdminDashboard = () => {
       </header>
 
       <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        {/* Real-time Alerts */}
-        <div className="lg:col-span-2 p-6 bg-gray-800 rounded-2xl shadow-lg transition-transform hover:scale-[1.01] duration-300">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-gray-100 flex items-center space-x-2">
-              <BellRing size={24} className="text-red-500 animate-pulse" />
-              <span>Real-time Alerts ({alerts.length})</span>
-            </h2>
-            <button
-              onClick={() => setIsAddIncidentModalOpen(true)}
-              className="bg-red-600 text-white p-2 rounded-full shadow-md hover:bg-red-700 transition"
-            >
-              <Plus size={20} />
-            </button>
-          </div>
-          <div className="h-96 overflow-y-auto custom-scrollbar">
-            {alerts.length === 0 ? (
-              <p className="text-center text-gray-400 mt-20">No active alerts.</p>
-            ) : (
-              alerts.map(alert => (
-                <div key={alert.id} className="bg-gray-700 p-4 rounded-xl shadow-inner mb-4 flex justify-between items-center transition-transform transform hover:scale-[1.02]">
-                  <div>
-                    <p className="font-semibold text-gray-50 flex items-center space-x-2">
-                      <AlertCircle size={20} className="text-red-400" />
-                      <span>Tourist ID: {alert.touristId}</span>
-                    </p>
-                    <p className="text-sm text-gray-300 mt-1">Location: {alert.location}</p>
-                    <p className="text-sm text-gray-400 mt-1">{alert.description}</p>
-                    <p className="text-xs text-gray-500 mt-1">Status: {alert.status}</p>
-                  </div>
-                  <button className="text-blue-400 hover:text-blue-300">
-                    <ChevronRight size={20} />
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-
-        {/* Tourist Management & Map */}
+        {/* Real-time Alerts & Map - Now in a single column */}
         <div className="lg:col-span-1 grid grid-rows-2 gap-8">
-          {/* Tourist Management */}
+          {/* Real-time Alerts */}
           <div className="p-6 bg-gray-800 rounded-2xl shadow-lg transition-transform hover:scale-[1.01] duration-300">
-            <h2 className="text-2xl font-bold text-gray-100 flex items-center space-x-2 mb-4">
-              <Users size={24} className="text-green-500" />
-              <span>Registered Tourists ({tourists.length})</span>
-            </h2>
-            <div className="flex items-center space-x-2 mb-4">
-              <Search size={20} className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search tourists..."
-                className="w-full bg-gray-700 text-gray-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              />
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-gray-100 flex items-center space-x-2">
+                <BellRing size={24} className="text-red-500 animate-pulse" />
+                <span>Real-time Alerts ({alerts.length})</span>
+              </h2>
+              <button
+                onClick={() => setIsAddIncidentModalOpen(true)}
+                className="bg-red-600 text-white p-2 rounded-full shadow-md hover:bg-red-700 transition"
+              >
+                <Plus size={20} />
+              </button>
             </div>
             <div className="h-40 overflow-y-auto custom-scrollbar">
-              {tourists.length === 0 ? (
-                <p className="text-center text-gray-400 mt-10">No tourists registered yet.</p>
+              {alerts.length === 0 ? (
+                <p className="text-center text-gray-400 mt-10">No active alerts.</p>
               ) : (
-                tourists.map(tourist => (
-                  <div key={tourist.id} className="bg-gray-700 p-3 rounded-xl shadow-inner mb-2 flex justify-between items-center transition-transform transform hover:scale-[1.02]">
-                    <p className="font-semibold text-gray-50 truncate">{tourist.id}</p>
+                alerts.map(alert => (
+                  <div key={alert.id} className="bg-gray-700 p-4 rounded-xl shadow-inner mb-4 flex justify-between items-center transition-transform transform hover:scale-[1.02]">
+                    <div>
+                      <p className="font-semibold text-gray-50 flex items-center space-x-2">
+                        <AlertCircle size={20} className="text-red-400" />
+                        <span>Tourist ID: {alert.touristId}</span>
+                      </p>
+                      <p className="text-sm text-gray-300 mt-1">Location: {alert.location}</p>
+                      <p className="text-sm text-gray-400 mt-1">{alert.description}</p>
+                      <p className="text-xs text-gray-500 mt-1">Status: {alert.status}</p>
+                    </div>
                     <button className="text-blue-400 hover:text-blue-300">
-                      <ChevronRight size={16} />
+                      <ChevronRight size={20} />
                     </button>
                   </div>
                 ))
@@ -196,6 +166,38 @@ const AdminDashboard = () => {
               <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(https://placehold.co/600x400/1F2937/9CA3AF/png?text=Mock+Map+View)' }}></div>
               <p className="absolute text-white text-center text-sm p-2 bg-black bg-opacity-50 rounded">Live locations would be displayed here.</p>
             </div>
+          </div>
+        </div>
+        
+        {/* Registered Tourists - Now in a wider, two-column space */}
+        <div className="lg:col-span-2 p-6 bg-gray-800 rounded-2xl shadow-lg transition-transform hover:scale-[1.01] duration-300">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold text-gray-100 flex items-center space-x-2">
+              <Users size={24} className="text-green-500" />
+              <span>Registered Tourists ({tourists.length})</span>
+            </h2>
+          </div>
+          <div className="flex items-center space-x-2 mb-4">
+            <Search size={20} className="text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search tourists..."
+              className="w-full bg-gray-700 text-gray-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            />
+          </div>
+          <div className="h-96 overflow-y-auto custom-scrollbar">
+            {tourists.length === 0 ? (
+              <p className="text-center text-gray-400 mt-20">No tourists registered yet.</p>
+            ) : (
+              tourists.map(tourist => (
+                <div key={tourist.id} className="bg-gray-700 p-3 rounded-xl shadow-inner mb-2 flex justify-between items-center transition-transform transform hover:scale-[1.02]">
+                  <p className="font-semibold text-gray-50 truncate">{tourist.id}</p>
+                  <button className="text-blue-400 hover:text-blue-300">
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </main>
