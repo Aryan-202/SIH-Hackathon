@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { UserPlus, ShieldCheck, Zap, Globe, Lock, Bell, MapPin, CheckSquare, Briefcase, Sun, Share2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const TouristLandingPage = () => {
   const heroRef = useRef(null);
@@ -8,6 +9,7 @@ const TouristLandingPage = () => {
   const [heroVisible, setHeroVisible] = useState(false);
   const [trustVisible, setTrustVisible] = useState(false);
   const [tipsVisible, setTipsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observerOptions = {
@@ -46,9 +48,7 @@ const TouristLandingPage = () => {
   }, []);
 
   const handleNavigateToRegister = () => {
-    // This is a placeholder for your navigation logic.
-    // In your actual app, you would use a router, e.g., navigate('/register');
-    console.log('Navigating to the registration page...');
+    navigate('/tourist/register');
   };
 
   return (
