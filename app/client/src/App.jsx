@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import LandingPage from './pages/common/LandingPage'
 import AdminRoutes from './pages/admin/AdminRoutes'
 import TouristRoutes from './pages/tourist/TouristRoutes'
+import About from './pages/common/About/About'
 
 const App = () => {
   return (
@@ -17,7 +18,9 @@ const App = () => {
         <Routes>
           <Route path='/tourist/*' element={<TouristRoutes/>} />
         </Routes>
-        
+        <Routes>
+          <Route path="/about" element={<About />} />
+        </Routes>
       </div>
     </Router>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '../../components/UI/Navbar'; // Adjust path if necessary
 import { ShieldCheck, UserPlus, Info, MapPin, QrCode, HardHat, PhoneCall, Globe, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   const featuresRef = useRef(null);
@@ -62,13 +63,13 @@ const LandingPage = () => {
                 <UserPlus className="w-5 h-5 mr-2" />
                 Register as Tourist
               </button>
-              <button 
-                onClick={() => console.log('Learn More clicked')}
-                className="btn-secondary animate-scale-in animate-delay-100"
+              <Link 
+                to="/about"
+                className="btn-secondary animate-scale-in animate-delay-100 flex items-center justify-center"
               >
                 <Info className="w-5 h-5 mr-2" />
                 Learn More
-              </button>
+              </Link>
             </div>
             
             {/* Trust-building Section */}
