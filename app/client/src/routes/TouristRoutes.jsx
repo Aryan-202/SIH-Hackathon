@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import TouristLandingPage from './TouristLandingPage'
-import TouristRegistrationPage from './TouristRegistrationPage'
+import TouristLandingPage from '../pages/tourist/TouristLandingPage'
+import TouristRegistrationPage from '../pages/tourist/TouristRegistrationPage'
 
 const TouristRoutes = () => {
   return (

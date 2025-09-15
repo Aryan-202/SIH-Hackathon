@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { LogIn, MapPin, BellRing, Users, FileText, CheckCircle, ShieldPlus, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLandingPage = () => {
   const heroRef = useRef(null);
@@ -8,6 +9,7 @@ const AdminLandingPage = () => {
   const [heroVisible, setHeroVisible] = useState(false);
   const [featuresVisible, setFeaturesVisible] = useState(false);
   const [howItWorksVisible, setHowItWorksVisible] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const observerOptions = {
@@ -46,9 +48,7 @@ const AdminLandingPage = () => {
   }, []);
 
   const handleNavigateToDashboard = () => {
-    // This is a placeholder for your navigation logic.
-    // In your actual app, you would use a router, e.g., navigate('/admin-dashboard');
-    console.log('Navigating to the admin dashboard...');
+    navigate('/admin/dashboard')
   };
 
   return (
