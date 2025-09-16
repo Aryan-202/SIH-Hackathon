@@ -110,7 +110,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // API routes with versioning
-app.use('/api/v1/tourists', require('./routes/tourists'));
+app.use('/api/v1/tourist', require('./routes/tourists'));
 app.use('/api/v1/admin', require('./routes/admin'));
 
 // 404 handler for API routes
