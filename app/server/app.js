@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
+const chatbotRoutes = require("./routes/chatbot"); 
 
 // Load env vars
 dotenv.config();
@@ -31,3 +32,6 @@ app.get('/api/health', (req, res) => {
 app.use(errorHandler);
 
 module.exports = app;
+
+// Mount chatbot route
+app.use("/api/chatbot", chatbotRoutes);
