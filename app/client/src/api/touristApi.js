@@ -2,11 +2,8 @@ import axios from 'axios';
 
 // Base URL for your backend API - using a direct URL for development
 // Create React App automatically makes environment variables available that start with REACT_APP_
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-console.log('Environment:', {
-  apiUrl: process.env.REACT_APP_API_BASE_URL || import.meta.env.REACT_APP_API_BASE_URL,
-  allEnv: process.env || import.meta.env
-});
+const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+
 
 // Create axios instance with default config
 const api = axios.create({
@@ -49,7 +46,7 @@ export const touristApi = {
   // Register a new tourist
   register: async (touristData) => {
   try {
-    const response = await api.post('/api/v1/tourists/register', touristData);
+    const response = await api.post('/api/v1/tourist/register', touristData);
     return response.data;
   } catch (error) {
     // Better error handling
@@ -63,7 +60,7 @@ export const touristApi = {
   // Login tourist
   login: async (credentials) => {
     try {
-      const response = await api.post('/api/v1/tourists/login', credentials);
+      const response = await api.post('/api/v1/tourist/login', credentials);
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Login failed. Please try again.' };
@@ -73,7 +70,7 @@ export const touristApi = {
   // Get tourist profile (protected route)
   getProfile: async () => {
     try {
-      const response = await api.get('/api/v1/tourists/me');
+      const response = await api.get('/api/v1/tourist/me');
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to fetch profile.' };
@@ -83,7 +80,7 @@ export const touristApi = {
   // Update location (protected route)
   updateLocation: async (locationData) => {
     try {
-      const response = await api.post('/api/v1/tourists/location', locationData);
+      const response = await api.post('/api/v1/tourist/location', locationData);
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to update location.' };
@@ -93,7 +90,7 @@ export const touristApi = {
   // Trigger panic alert (protected route)
   triggerPanic: async () => {
     try {
-       const response = await api.post('/api/v1/tourists/panic');
+       const response = await api.post('/api/v1/tourist/panic');
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to trigger panic alert.' };
