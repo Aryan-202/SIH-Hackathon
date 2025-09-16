@@ -1,39 +1,33 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 import './App.css'
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import DashBoard from './pages/DashBoard';
-import PageNotFound from './pages/PageNotFound';
-import SignupPage from './pages/SignupPage';
-import { GoogleOAuthProvider } from '@react-oauth/google'
-//import TouristPage from './pages/TouristPage';
-import TouristPage from './pages/TouristPage';
-// You must define your Google Client ID here.
-// Get this from your Google Cloud Console project.
-const clientId = "213842657098-jppcg1cul11sthuhc1717eq15f8btapq.apps.googleusercontent.com";
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
-      <Router>
-        <main>
-          <Routes>
-            <Route path='/' element={<HomePage/>}/>
-            <Route path='/login' element={<LoginPage/>}/>
-            <Route path='/dashboard' element={<DashBoard/>}/>
-            <Route path='/signup' element={
-            
-
-              <GoogleOAuthProvider clientId={clientId}>
-                  <SignupPage />
-              </GoogleOAuthProvider>
-              }/>
-            
-            <Route path='/tourist' element={<TouristPage />} />
-            <Route path='*' element={<PageNotFound/>}/>
-          </Routes>
-        </main>
-      </Router>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </>
   )
 }
