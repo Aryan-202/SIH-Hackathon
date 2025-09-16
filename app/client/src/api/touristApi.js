@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base URL for your backend API - using a direct URL for development
 // Create React App automatically makes environment variables available that start with REACT_APP_
-const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 // Create axios instance with default config
 const api = axios.create({
