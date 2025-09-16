@@ -69,7 +69,7 @@ export const touristApi = {
   // Get tourist profile (protected route)
   getProfile: async () => {
     try {
-      const response = await api.get('/tourists/me');
+      const response = await api.get('/api/v1/tourists/me');
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to fetch profile.' };
@@ -79,7 +79,7 @@ export const touristApi = {
   // Update location (protected route)
   updateLocation: async (locationData) => {
     try {
-      const response = await api.post('/tourists/location', locationData);
+      const response = await api.post('/api/v1/tourists/location', locationData);
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to update location.' };
@@ -89,12 +89,16 @@ export const touristApi = {
   // Trigger panic alert (protected route)
   triggerPanic: async () => {
     try {
-      const response = await api.post('/tourists/panic');
+       const response = await api.post('/api/v1/tourists/panic');
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to trigger panic alert.' };
     }
   },
+  clearAuthData: () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('touristData');
+  }
 };
 
 // Utility function to store auth data
@@ -115,5 +119,7 @@ export const clearAuthData = () => {
   localStorage.removeItem('authToken');
   localStorage.removeItem('touristData');
 };
+
+
 
 export default touristApi;

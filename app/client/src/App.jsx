@@ -6,6 +6,7 @@ import TouristRoutes from './routes/TouristRoutes'
 import About from './pages/common/About'
 import Navbar from './components/UI/Navbar'
 import Footer from './components/UI/Footer'
+import FloatingActionButton from './components/UI/FloatingActionButton'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/tourist/*' element={<TouristRoutes/>} />
           <Route path="/about" element={<About />} />
         </Routes>
+        <FloatingActionButton/>
         <Footer/>
       </div>
     </Router>
