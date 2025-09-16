@@ -9,7 +9,9 @@ const server = http.createServer(app);
 
 // CORS configuration for both Express and Socket.io
 const corsOptions = {
-  origin: 'https://sih-hackathon-seven.vercel.app',
+  origin: ['https://sih-hackathon-seven.vercel.app', // Your Vercel domain
+    'http://localhost:3000',                  // Local development
+    'http://localhost:5173'  ],                 // Common Vite dev server port]
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
