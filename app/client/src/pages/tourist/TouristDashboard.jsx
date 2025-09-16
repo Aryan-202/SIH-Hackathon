@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { touristApi, getAuthData, clearAuthData } from '../../api/touristApi';
 import { useNavigate } from 'react-router-dom';
+import MapSection from "../components/UI/MapSection";
 
 const TouristDashboard = () => {
   const [touristData, setTouristData] = useState(null);
@@ -161,6 +162,7 @@ const TouristDashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Welcome Card */}
             <div className="col-span-full bg-white overflow-hidden shadow rounded-lg">
+               
               <div className="px-4 py-5 sm:p-6">
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
                   Welcome to your dashboard, {touristData?.fullName}
@@ -190,6 +192,13 @@ const TouristDashboard = () => {
                   </button>
                 </div>
               </div>
+            </div>
+            {/* Map Section */}
+            <div className="col-span-full bg-white overflow-hidden shadow rounded-lg">
+               <MapSection 
+                   latitude={location.latitude || 28.6139} 
+                   longitude={location.longitude || 77.2090} 
+              />
             </div>
 
             {/* Emergency Button */}
