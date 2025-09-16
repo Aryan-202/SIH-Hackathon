@@ -2,12 +2,23 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, Users, Briefcase } from 'lucide-react';
 
+// IMPORTANT: Replace this path with the actual path to your new circular, transparent logo file
+import SafvoyLogo from '../../pages/common/Logo.png'; 
+
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-2xl shadow-2xl p-6 rounded-b-3xl border-b border-gray-200">
+    // --- MODIFIED: Reverted to a light, professional background ---
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white p-6 rounded-b-3xl border-b border-gray-200 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 drop-shadow-sm">Safety System</h1>
-        <div className="flex space-x-2 md:space-x-6">
+        <div className="flex items-center space-x-3">
+          {/* Logo integration */}
+          <img src={SafvoyLogo} alt="Safvoy Logo" className="h-18 w-18 object-contain" />
+          {/* --- MODIFIED: Text color for light background --- */}
+          <h1 className="text-2xl font-bold text-gray-800">
+            SafVoy
+          </h1>
+        </div>
+        <div className="flex space-x-2 md:space-x-4">
           <NavLink
             to="/"
             end
@@ -15,7 +26,7 @@ const Navbar = () => {
               `nav-link ${isActive ? 'nav-link-active' : ''}`
             }
           >
-            <Home className="w-5 h-5 mr-1 md:mr-2" />
+            <Home className="w-5 h-5 mr-2" />
             Home
           </NavLink>
           <NavLink
@@ -24,7 +35,7 @@ const Navbar = () => {
               `nav-link ${isActive ? 'nav-link-active' : ''}`
             }
           >
-            <Users className="w-5 h-5 mr-1 md:mr-2" />
+            <Users className="w-5 h-5 mr-2" />
             Tourists
           </NavLink>
           <NavLink
@@ -33,24 +44,24 @@ const Navbar = () => {
               `nav-link ${isActive ? 'nav-link-active' : ''}`
             }
           >
-            <Briefcase className="w-5 h-5 mr-1 md:mr-2" />
+            <Briefcase className="w-5 h-5 mr-2" />
             Authorities
           </NavLink>
         </div>
       </div>
-      {/* Custom Tailwind CSS classes */}
+      {/* --- MODIFIED: Styles updated for light background --- */}
       <style>{`
         .nav-link {
-          @apply text-gray-700 font-semibold px-4 py-2 md:px-6 md:py-3 rounded-full transition-all duration-300 ease-in-out flex items-center justify-center;
+          @apply flex items-center justify-center rounded-full px-4 py-2 font-semibold text-gray-600 transition-all duration-300;
         }
         .nav-link:hover {
-          @apply bg-blue-100 text-blue-600 shadow-md transform scale-105;
+          @apply text-blue-600 bg-blue-50;
         }
         .nav-link-active {
-          @apply bg-blue-500 text-white shadow-xl transform scale-110;
+          @apply bg-blue-600 text-white shadow-lg shadow-blue-600/40;
         }
         .nav-link-active:hover {
-          @apply bg-blue-600;
+          @apply bg-blue-700;
         }
       `}</style>
     </nav>

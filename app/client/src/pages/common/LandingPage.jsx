@@ -50,7 +50,7 @@ const LandingPage = () => {
           {/* Main Content & CTA */}
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4 animate-fade-in-up">
-              Smart Tourist Safety System
+              SafVoy
             </h1>
             <p className="text-lg md:text-xl text-gray-700 max-w-2xl mb-8 animate-fade-in-up animate-delay-200">
               Your safety is our priority. Digital ID + AI monitoring + faster emergency response.
@@ -115,52 +115,111 @@ const LandingPage = () => {
       </div>
       
       {/* Features Section */}
-      <div ref={featuresRef} className={`py-20 p-4 transition-all duration-1000 transform ${featuresVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <div
+        ref={featuresRef}
+        className={`py-20 p-4 transition-all duration-1000 transform ${
+          featuresVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
         <div className="container mx-auto max-w-6xl text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12">Key Features</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12">
+            Key Features
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="feature-card">
-              <HardHat className="w-12 h-12 text-blue-500 mb-4" />
+            {/* Feature 1 */}
+            <div className="feature-card border border-slate-300 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+              <HardHat className="w-12 h-12 text-blue-500 mb-4 mx-auto" />
               <h3 className="text-xl font-bold mb-2">Real-time Monitoring</h3>
-              <p className="text-gray-600">AI-powered algorithms constantly analyze your surroundings to detect potential threats and anomalies.</p>
+              <p className="text-gray-600">
+                AI-powered algorithms constantly analyze your surroundings to detect
+                potential threats and anomalies.
+              </p>
             </div>
-            <div className="feature-card">
-              <PhoneCall className="w-12 h-12 text-blue-500 mb-4" />
+
+            {/* Feature 2 */}
+            <div className="feature-card border border-slate-300 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+              <PhoneCall className="w-12 h-12 text-blue-500 mb-4 mx-auto" />
               <h3 className="text-xl font-bold mb-2">One-Click SOS</h3>
-              <p className="text-gray-600">Instantly alert emergency services and your contacts with a single tap, providing your location.</p>
+              <p className="text-gray-600">
+                Instantly alert emergency services and your contacts with a single
+                tap, providing your location.
+              </p>
             </div>
-            <div className="feature-card">
-              <Globe className="w-12 h-12 text-blue-500 mb-4" />
+
+            {/* Feature 3 */}
+            <div className="feature-card border border-slate-300 rounded-xl p-6 shadow-sm hover:shadow-md transition">
+              <Globe className="w-12 h-12 text-blue-500 mb-4 mx-auto" />
               <h3 className="text-xl font-bold mb-2">Multilingual Support</h3>
-              <p className="text-gray-600">Access vital information and communicate with authorities in multiple languages.</p>
+              <p className="text-gray-600">
+                Access vital information and communicate with authorities in multiple
+                languages.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
+
       {/* How It Works Section */}
-      <div ref={howItWorksRef} className={`py-20 p-4 bg-gray-200 transition-all duration-1000 transform ${howItWorksVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+      <div
+        ref={howItWorksRef}
+        className={`py-20 p-4 bg-gray-200 transition-all duration-1000 transform ${
+          howItWorksVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
+        }`}
+      >
         <div className="container mx-auto max-w-6xl text-center">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="step-card">
-              <span className="step-number">1</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-12">
+            How It Works
+          </h2>
+
+          {/* Steps with Flow Line */}
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            {/* Horizontal line (desktop) */}
+            <div className="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-gray-300 z-0" />
+
+            {/* Step 1 */}
+            <div className="step-card relative z-10 flex flex-col items-center">
+              <span className="text-4xl md:text-4xl font-bold text-gray-700 mb-2">
+                1
+              </span>
               <h3 className="text-xl font-bold mb-2">Register</h3>
-              <p className="text-gray-600">Create your digital ID and set up your emergency contacts and details.</p>
+              <p className="text-gray-600">
+                Create your digital ID and set up your emergency contacts and details.
+              </p>
             </div>
-            <div className="step-card">
-              <span className="step-number">2</span>
+
+            {/* Step 2 */}
+            <div className="step-card relative z-10 flex flex-col items-center">
+              <span className="text-4xl md:text-4xl font-bold text-gray-700 mb-2">
+                2
+              </span>
               <h3 className="text-xl font-bold mb-2">Explore Safely</h3>
-              <p className="text-gray-600">Your status is monitored in real-time, providing peace of mind as you travel.</p>
+              <p className="text-gray-600">
+                Your status is monitored in real-time, providing peace of mind as you
+                travel.
+              </p>
             </div>
-            <div className="step-card">
-              <span className="step-number">3</span>
+
+            {/* Step 3 */}
+            <div className="step-card relative z-10 flex flex-col items-center">
+              <span className="text-4xl md:text-4xl font-bold text-gray-700 mb-2">
+                3
+              </span>
               <h3 className="text-xl font-bold mb-2">Get Help</h3>
-              <p className="text-gray-600">In an emergency, your location and ID are shared with authorities for a fast response.</p>
+              <p className="text-gray-600">
+                In an emergency, your location and ID are shared with authorities for a
+                fast response.
+              </p>
             </div>
+
           </div>
         </div>
       </div>
+
+
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');

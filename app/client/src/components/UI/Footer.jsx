@@ -8,7 +8,7 @@ const Footer = () => {
 
         {/* Column 1: Brand Info and Mission */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
-          <h4 className="text-2xl font-bold mb-2 text-blue-400">Smart Tourist Safety System</h4>
+          <h4 className="text-2xl font-bold mb-2 text-blue-400">SafVoy</h4>
           <p className="text-sm text-gray-300 mb-4 max-w-xs">
             Empowering tourists and protecting communities through innovative, privacy-first technology.
           </p>

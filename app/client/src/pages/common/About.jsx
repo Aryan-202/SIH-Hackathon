@@ -156,7 +156,7 @@ const About = () => {
             {/* Team Member: Vaishnavi Panday */}
             <div className="text-center">
               <User className="w-24 h-24 mx-auto text-gray-400 mb-1" />
-              <h4 className="font-semibold text-lg">Vaishnavi Panday</h4>
+              <h4 className="font-semibold text-lg">Vaishnavi Pandey</h4>
               <p className="text-sm text-gray-500">Mobile App Designer</p>
             </div>
             {/* Team Member: Aadya Priyam */}
