@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-// Base URL for your backend API - using a direct URL for development
-// Create React App automatically makes environment variables available that start with REACT_APP_
-const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL || 'https://sih-hackathon-3wi7.onrender.com/api/v1';
-
+// Base URL for your backend API
+// Make sure this matches your deployed backend URL
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://sih-hackathon-3wi7.onrender.com/api/v1';
 
 // Create axios instance with default config
 const api = axios.create({
@@ -43,24 +42,25 @@ api.interceptors.response.use(
 
 // Tourist API functions
 export const touristApi = {
-  // Register a new tourist
+  // Register a new tourist - FIXED: Use correct endpoint path
   register: async (touristData) => {
-  try {
-    const response = await api.post('/api/v1/tourist/register', touristData);
-    return response.data;
-  } catch (error) {
-    // Better error handling
-    const errorMessage = error.response?.data?.message || 
-                        error.message || 
-                        'Registration failed. Please try again.';
-    throw new Error(errorMessage);
-  }
-},
+    try {
+      // The base URL already includes /api/v1, so we just need /tourists/register
+      const response = await api.post('/tourists/register', touristData);
+      return response.data;
+    } catch (error) {
+      // Better error handling
+      const errorMessage = error.response?.data?.message || 
+                          error.message || 
+                          'Registration failed. Please try again.';
+      throw new Error(errorMessage);
+    }
+  },
 
   // Login tourist
   login: async (credentials) => {
     try {
-      const response = await api.post('/api/v1/tourists/login', credentials);
+      const response = await api.post('/tourists/login', credentials);
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Login failed. Please try again.' };
@@ -70,7 +70,7 @@ export const touristApi = {
   // Get tourist profile (protected route)
   getProfile: async () => {
     try {
-      const response = await api.get('/api/v1/tourists/me');
+      const response = await api.get('/tourists/me');
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to fetch profile.' };
@@ -80,7 +80,7 @@ export const touristApi = {
   // Update location (protected route)
   updateLocation: async (locationData) => {
     try {
-      const response = await api.post('/api/v1/tourists/location', locationData);
+      const response = await api.post('/tourists/location', locationData);
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to update location.' };
@@ -90,12 +90,13 @@ export const touristApi = {
   // Trigger panic alert (protected route)
   triggerPanic: async () => {
     try {
-       const response = await api.post('/api/v1/tourists/panic');
+      const response = await api.post('/tourists/panic');
       return response.data;
     } catch (error) {
       throw error.response?.data || { message: 'Failed to trigger panic alert.' };
     }
   },
+  
   clearAuthData: () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('touristData');
@@ -120,7 +121,5 @@ export const clearAuthData = () => {
   localStorage.removeItem('authToken');
   localStorage.removeItem('touristData');
 };
-
-
 
 export default touristApi;
