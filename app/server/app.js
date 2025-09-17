@@ -56,7 +56,10 @@ const corsOptions = {
     const allowedOrigins = [
       process.env.FRONTEND_URL,
       'http://localhost:5173',
-      'http://localhost:3000' // Fallback for Create React App
+      'http://localhost:3000', // Fallback for Create React App
+      // Add patterns for Vercel preview deployments
+      'https://sih-hackathon-seven.vercel.app',
+      'https://sih-hackathon-8m3ta6dx2-aryans-projects-13fcb204.vercel.app'
     ].filter(Boolean); // Remove any undefined values
     
     // Allow requests with no origin (like mobile apps, curl, postman)
