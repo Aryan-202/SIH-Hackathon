@@ -13,6 +13,5 @@ const sendMessage = async () => {
   } catch (err) {
     setMessages((prev) => [...prev, { sender: "bot", text: "Error: Chatbot unavailable." }]);
   }
-
   setInput("");
 };
